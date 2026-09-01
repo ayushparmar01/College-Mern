@@ -111,3 +111,30 @@ exports.getStudentCountByCourse = async (req, res) => {
         });
     }
 };
+
+// to calculate the average age of students in each course using aggregation framework
+exports.getStudentAverageAgeByCourse = async (req, res) => {
+    try {
+        const result = await PracticeApi.aggregate([
+            {
+                $group: {
+                    _id: "$course",
+                    averageAge: { $avg: "$age" }
+                }
+            },
+            {$sort: { averageAge: -1 } }
+        ]);
+
+        res.status(200).json({
+            success: true,
+            data: result
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to calculate average age by course",
+            error: error.message
+        });
+    }
+};

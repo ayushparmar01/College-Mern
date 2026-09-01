@@ -6,7 +6,8 @@ const {
     getStudentsOlder21,
     getMJStudents,
     getStudentsStartingWithA,
-    getStudentCountByCourse
+    getStudentCountByCourse,
+    getStudentAverageAgeByCourse
 } = require("../controllers/practiceController");
 
 
@@ -23,5 +24,7 @@ router.get("/students/name-a", getStudentsStartingWithA);
 
 // Count of students by course
 router.get("/students/count-by-course", getStudentCountByCourse);
+
+router.get("/students/average-age-by-course", getStudentAverageAgeByCourse);
 
 module.exports = router;
