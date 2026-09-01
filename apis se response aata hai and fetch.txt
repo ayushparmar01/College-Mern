@@ -1,0 +1,10 @@
+apis se response aata hai and fetch ke thorugh ke aata hai. that data coming in json formate. i will save that data into the variable
+
+const studentName = 'AYush'
+int attempts = 0;
+attemmpts = 1;
+attempmts  =2;
+console.log(attempts): // 2
+studentName = 'Khush' // error
+
+splice and split method in js.. 
