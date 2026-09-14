@@ -1,5 +1,25 @@
 const PracticeApi = require("../models/practiceModel");
 
+
+
+exports.getAllStudents = async (req, res) => {
+    try {
+        const students = await PracticeApi.find();
+
+        res.status(200).json({
+            success: true,
+            count: students.length,
+            data: students
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch students",
+            error: error.message
+        });
+    }
+};
+
 // Find students age >= 21
 exports.getStudentsOlder21 = async (req, res) => {
     try {
@@ -138,3 +158,90 @@ exports.getStudentAverageAgeByCourse = async (req, res) => {
         });
     }
 };
+
+// to sort the students by age in ascending order
+exports.getStudentsSortedByAge = async (req, res) => {
+    try {
+
+        const order = req.query.order || "asc";;
+        let sortOrder;
+        
+        if(order === "asc") {
+            sortOrder = 1;
+        } else if(order === "desc") {
+            sortOrder = -1;
+        } else {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid order parameter. Use 'asc' or 'desc'."
+            }); 
+        }
+
+
+        const students = await PracticeApi.find()
+            .sort({ age: sortOrder });
+
+        res.status(200).json({
+            success: true,
+            count: students.length,
+            data: students
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch students sorted by age",
+            error: error.message
+        });
+    }
+};
+
+// create a students on email
+exports.createStudentEmail = async (req, res) => {
+    try {
+        const index = await PracticeApi.collection.createIndex(
+            { email: 1 },
+            { unique: true }
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Email unique index created successfully",
+            index: index
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to create email index",
+            error: error.message
+        });
+    }
+};
+
+// Explain the email query parameter
+exports.explainEmailQuery = async (req, res) => {
+    try {
+        const { email } = req.query;
+
+        if (!email) {
+            return res.status(400).json({
+                success: false,
+                message: "Email query parameter is required"
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Email query parameter received",
+            email: email
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Failed to explain email query",
+            error: error.message
+        });
+    }
+};
+

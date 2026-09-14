@@ -26,11 +26,9 @@ const practiceSchema = new mongoose.Schema({
     },
 
     course: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        enum: ["JAVA", "Python", "MERN", "C++", "NumPy", "Pandas"],
-        maxLength: 30,
-        trim: true
+        ref: "Course"
     },
 
     branch: {
@@ -45,3 +43,6 @@ const practiceSchema = new mongoose.Schema({
 const PracticeApi = mongoose.model("PracticeApi", practiceSchema);
 
 module.exports = PracticeApi;
+
+
+
