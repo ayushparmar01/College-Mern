@@ -7,6 +7,7 @@ const studentRoutes = require("./routes/createStudentRoutes");
 const teacherRoutes = require("./routes/teacherRoutes");
 const bcrypt = require('bcrypt');
 const User = require("./models/userModel");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/api", courseRoutes);
 app.use("/api", studentRoutes);
 app.use("/api/teachers", teacherRoutes);
 app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/auth", authRoutes);
 
 async function hashPassword(password) {
     try {
