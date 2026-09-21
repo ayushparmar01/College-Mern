@@ -1,3 +1,5 @@
+const path = require("path");
+app.use(express.static(path.join(__dirname, "frontend")));
 require("dotenv").config();
 const courseRoutes = require("./routes/courseRoutes");
 const express = require("express");
