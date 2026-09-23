@@ -1,3 +1,4 @@
+/*
 const Teacher = require("../models/teacherModel");
 
 const createTeacher = async (req, res) => {
@@ -52,4 +53,19 @@ const createTeacher = async (req, res) => {
 module.exports = {
     createTeacher
 };
+*/
 
+const mongoose = require("mongoose");
+
+const teacherSchema = new mongoose.Schema(
+    {
+        teacherName: { type: String, required: true, trim: true },
+        subject: { type: String, required: true, trim: true },
+        experience: { type: Number, required: true, min: 0 },
+        email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+        department: { type: String, required: true, trim: true }
+    },
+    { timestamps: true }
+);
+
+module.exports = mongoose.model("Teacher", teacherSchema);
