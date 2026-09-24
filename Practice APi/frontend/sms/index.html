@@ -1,53 +1,292 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sms</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-     <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script> -->
-    <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="flex h-16 items-center justify-between gap-3">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Practice API Console</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between gap-3">
 
-      <!-- LOGO -->
-      <div class="flex items-center gap-3">
-        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white font-bold shadow-sm">
-          P
+        <!-- LOGO -->
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white font-bold shadow-sm">
+            P
+          </div>
+          <div class="hidden sm:block">
+            <h1 class="text-lg font-bold tracking-tight text-slate-900">Practice API</h1>
+            <p class="text-xs text-slate-500">Frontend for your MERN backend</p>
+          </div>
         </div>
-        <div class="hidden sm:block">
-          <h1 class="text-lg font-bold tracking-tight text-slate-900">Practice API</h1>
-          <p class="text-xs text-slate-500">Frontend for your MERN backend</p>
+
+        <!-- STATUS PILLS -->
+        <div class="flex items-center gap-2">
+          <span id="userPill" class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600">
+            Signed out
+          </span>
+          <span class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600">
+            <span id="serverDot" class="h-2 w-2 rounded-full bg-slate-300"></span>
+            <span id="serverText">Checking…</span>
+          </span>
         </div>
+
       </div>
 
-      <!-- STATUS PILLS -->
-      <div class="flex items-center gap-2">
-        <span id="userPill" class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600">
-          Signed out
-        </span>
-        <span class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600">
-          <span id="serverDot" class="h-2 w-2 rounded-full bg-slate-300"></span>
-          <span id="serverText">Checking…</span>
-        </span>
-      </div>
-
+      <!-- TABS -->
+      <nav id="tabs" class="flex gap-1 overflow-x-auto border-t border-slate-200 -mx-1 px-1">
+        <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-indigo-600 border-b-2 border-indigo-600" data-tab="students" type="button">Students</button>
+        <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-slate-900" data-tab="analytics" type="button">Analytics</button>
+        <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-slate-900" data-tab="create" type="button">Create</button>
+        <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-slate-900" data-tab="auth" type="button">Auth &amp; Users</button>
+        <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-slate-900" data-tab="tools" type="button">Tools</button>
+        <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-slate-900" data-tab="cards" type="button">Student Cards</button>
+      </nav>
     </div>
+  </header>
 
-    <!-- TABS -->
-    <nav id="tabs" class="flex gap-1 overflow-x-auto border-t border-slate-200 -mx-1 px-1">
-      <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-indigo-600 border-b-2 border-indigo-600" data-tab="students" type="button">Students</button>
-      <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-slate-900" data-tab="analytics" type="button">Analytics</button>
-      <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-slate-900" data-tab="create" type="button">Create</button>
-      <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-slate-900" data-tab="auth" type="button">Auth &amp; Users</button>
-      <button class="tab whitespace-nowrap rounded-t-lg px-4 py-2.5 text-sm font-semibold text-slate-500 border-b-2 border-transparent hover:text-slate-900" data-tab="tools" type="button">Tools</button>
-    </nav>
-  </div>
-</header>
-  </body>
+  <main>
+    <!-- ================= STUDENTS ================= -->
+    <section class="panel active" id="tab-students">
+      <div class="card">
+        <div class="card-head">
+          <h2>Students <span class="count" id="studentCount">0</span></h2>
+          <button class="btn ghost" id="refreshBtn" type="button">↻ Refresh</button>
+        </div>
+
+        <div class="toolbar">
+          <div class="chips" id="filterChips">
+            <button class="chip active" data-filter="all" type="button">All</button>
+            <button class="chip" data-filter="older21" type="button">Age ≥ 21</button>
+            <button class="chip" data-filter="mj" type="button">MERN or JAVA</button>
+            <button class="chip" data-filter="name-a" type="button">Name starts with A</button>
+            <button class="chip" data-filter="sorted" type="button">Sort by age</button>
+          </div>
+          <select id="sortOrder" hidden aria-label="Sort order">
+            <option value="asc">Youngest first</option>
+            <option value="desc">Oldest first</option>
+          </select>
+        </div>
+
+        <input id="search" type="search" placeholder="Search loaded students by name, email or branch…" />
+        <p class="endpoint" id="endpointLabel"></p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Student</th><th>Email</th><th>Age</th><th>Branch</th><th>Course</th></tr>
+            </thead>
+            <tbody id="studentsBody"></tbody>
+          </table>
+        </div>
+        <div id="studentsState" class="state" hidden></div>
+      </div>
+    </section>
+
+    <!-- ================= ANALYTICS ================= -->
+    <section class="panel" id="tab-analytics">
+      <div class="panel-head">
+        <div>
+          <h2>Course analytics</h2>
+          <p class="muted">Powered by the MongoDB aggregation endpoints.</p>
+        </div>
+        <button class="btn ghost" id="analyticsRefresh" type="button">↻ Refresh</button>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Students per course</h3>
+          <p class="endpoint">GET /api/practice/students/count-by-course</p>
+          <div class="bars" id="countBars"></div>
+        </div>
+        <div class="card">
+          <h3>Average age per course</h3>
+          <p class="endpoint">GET /api/practice/students/average-age-by-course</p>
+          <div class="bars" id="ageBars"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CREATE ================= -->
+    <section class="panel" id="tab-create">
+      <div class="panel-head">
+        <div>
+          <h2>Create records</h2>
+          <p class="muted">Each form sends a POST request to your backend.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <form class="card" id="courseForm">
+          <h3>New course</h3>
+          <p class="endpoint">POST /api/courses</p>
+          <label>Title <input name="title" required placeholder="MERN Stack" /></label>
+          <label>Duration <input name="duration" required placeholder="6 months" /></label>
+          <label>Teacher <input name="teacher" required placeholder="Rahul Sharma" /></label>
+          <button class="btn" type="submit">Create course</button>
+          <p class="form-msg" role="status"></p>
+        </form>
+
+        <form class="card" id="studentForm">
+          <h3>New student</h3>
+          <p class="endpoint">POST /api/students</p>
+          <label>Name <input name="name" required placeholder="Aman Verma" /></label>
+          <div class="field-row">
+            <label>Age <input name="age" type="number" min="1" required placeholder="21" /></label>
+            <label>Branch
+              <select name="branch" required>
+                <option value="CSE">CSE</option>
+                <option value="AIML">AIML</option>
+                <option value="CE">CE</option>
+                <option value="ME">ME</option>
+                <option value="ECE">ECE</option>
+                <option value="EE">EE</option>
+              </select>
+            </label>
+          </div>
+          <label>Email <input name="email" type="email" required placeholder="aman@example.com" /></label>
+          <label>Course <input name="course" required placeholder="MERN" /></label>
+          <button class="btn" type="submit">Create student</button>
+          <p class="form-msg" role="status"></p>
+        </form>
+
+        <form class="card" id="teacherForm">
+          <h3>New teacher</h3>
+          <p class="endpoint">POST /api/teachers/create</p>
+          <label>Teacher name <input name="teacherName" required placeholder="Neha Singh" /></label>
+          <label>Subject <input name="subject" required placeholder="Node.js" /></label>
+          <div class="field-row">
+            <label>Experience (yrs) <input name="experience" type="number" min="0" required placeholder="5" /></label>
+            <label>Department <input name="department" required placeholder="CSE" /></label>
+          </div>
+          <label>Email <input name="email" type="email" required placeholder="neha@example.com" /></label>
+          <button class="btn" type="submit">Create teacher</button>
+          <p class="form-msg" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================= AUTH & USERS ================= -->
+    <section class="panel" id="tab-auth">
+      <div class="panel-head">
+        <div>
+          <h2>Auth &amp; users</h2>
+          <p class="muted">Register, log in and test your JWT-protected routes.</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <form class="card" id="registerForm">
+          <h3>Register</h3>
+          <p class="endpoint">POST /api/auth/register</p>
+          <label>Name <input name="name" required placeholder="Ayush Parmar" /></label>
+          <label>Email <input name="email" type="email" required placeholder="you@example.com" /></label>
+          <div class="field-row">
+            <label>Password <input name="password" type="password" minlength="6" required placeholder="min 6 characters" /></label>
+            <label>Role
+              <select name="role">
+                <option value="STUDENT">STUDENT</option>
+                <option value="TEACHER">TEACHER</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            </label>
+          </div>
+          <button class="btn" type="submit">Create account</button>
+          <p class="form-msg" role="status"></p>
+        </form>
+
+        <form class="card" id="loginForm">
+          <h3>Log in</h3>
+          <p class="endpoint">POST /api/auth/login</p>
+          <label>Email <input name="email" type="email" required placeholder="you@example.com" /></label>
+          <label>Password <input name="password" type="password" required placeholder="••••••" /></label>
+          <button class="btn" type="submit">Log in</button>
+          <p class="form-msg" role="status"></p>
+        </form>
+
+        <div class="card" id="sessionCard">
+          <h3>Session</h3>
+          <p class="endpoint">GET /api/auth/profile · POST /api/auth/logout</p>
+          <div id="sessionBox"></div>
+          <div class="btn-row">
+            <button class="btn needs-auth" id="profileBtn" type="button">Verify token</button>
+            <button class="btn danger needs-auth" id="logoutBtn" type="button">Log out</button>
+          </div>
+          <p class="form-msg" role="status"></p>
+        </div>
+
+        <div class="card wide">
+          <div class="card-head">
+            <div>
+              <h3>All users</h3>
+              <p class="endpoint">GET /api/users</p>
+            </div>
+            <button class="btn ghost" id="usersBtn" type="button">Load users</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Email</th><th>Role</th></tr></thead>
+              <tbody id="usersBody"></tbody>
+            </table>
+          </div>
+          <div id="usersState" class="state" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TOOLS ================= -->
+    <section class="panel" id="tab-tools">
+      <div class="panel-head">
+        <div>
+          <h2>Tools</h2>
+          <p class="muted">Utility endpoints from the practice controller.</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card" id="indexCard">
+          <h3>Unique email index</h3>
+          <p class="endpoint">POST /api/practice/students/create-email</p>
+          <p class="muted">Creates a unique index on the <code>email</code> field of the practice collection.</p>
+          <button class="btn" id="indexBtn" type="button">Create index</button>
+          <p class="form-msg" role="status"></p>
+        </div>
+
+        <form class="card" id="explainForm">
+          <h3>Explain email query</h3>
+          <p class="endpoint">GET /api/practice/students/explain-email-query?email=</p>
+          <label>Email <input name="email" type="email" required placeholder="aman@example.com" /></label>
+          <button class="btn" type="submit">Send query</button>
+          <p class="form-msg" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================= STUDENT CARDS ================= -->
+    <section class="panel" id="tab-cards">
+      <div class="panel-head">
+        <div>
+          <h2>Student cards</h2>
+          <p class="muted">Qualification &amp; academics are stored in your browser (not the database).</p>
+        </div>
+        <button class="btn ghost" id="cardsRefresh" type="button">↻ Refresh</button>
+      </div>
+      <input id="cardsSearch" type="search" placeholder="Search by name, email or branch…" />
+      <div class="card-grid" id="cardsGrid"></div>
+      <div id="cardsState" class="state" hidden></div>
+    </section>
+  </main>
+
+  <!-- Response inspector -->
+  <details class="inspector" id="inspector">
+    <summary>
+      <span class="inspector-title">Response inspector</span>
+      <span class="meta" id="inspectMeta">No requests yet</span>
+    </summary>
+    <pre id="inspectBody">Make a request and the raw JSON response will appear here.</pre>
+  </details>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
 </html>
